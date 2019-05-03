@@ -1,12 +1,8 @@
 public class Lettre {
 
+    public char car;
 
-    private char car;
-
-    private int points;
-
-    Lettre (char carac,int valeur){...}
-
+    public int points;
 
     public Lettre(){
         this.car='.';
@@ -60,8 +56,7 @@ public class Lettre {
             case 'Z':
                 this.points=10;
             break;
-        break;
-        }
+	}
     }
         
     // return la lettre 
