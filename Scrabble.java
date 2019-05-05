@@ -1,42 +1,18 @@
-/**
-* Un jeu de scrabble de 2 à 4 joueurs
-*/
-
-
-public class Scrabble {
-	
-	/**
-	* Type agrégé pour le sac, un sac est constitué d'un nombre de lettre
-	*/
-	static class Sac {
-		int nombreLettre;
+public class test {
+	public static void main(String[] args) {
+ 
+	   // On crÃ©e un sac de lettre
+	   SacDeLettres sac = new SacDeLettres();
+	   //on affiche les lettres contenue dans le sac de lettre
+	   String strSac = sac.SacToString();
+	   Ecran.afficher(strSac);
+	   // on crÃ©e un chevalet et on le remplit de 7 lettres
+	   Chevalet c = new Chevalet();
+	   c.remplirChevalet(sac);
+	   String strC = c.chevaletToString();
+	   
+	   // on affiche le chevalet et le sac de lettre une fois fini
+	   Ecran.afficher(strC);
+	   Ecran.afficher(strSac);
 	}
-	
-	/**
-	* Type agrégé pour le Joueur, un joueur possède un nom, un chevalet et un score
-	*/
-	static class Joueur {
-		String nom;
-		Chevalet chevalet;
-		int score;
-	}
-	
-	/**
-	* Type agrégé pour le Chevalet, un chevalet est constitué d'un nombre de 
-	* lettre inférieur ou égal à 7
-	*/
-	static class Chevalet {
-		char... lettre;
-	}
-	
-	/**
-	* Fonction pour créer le Sac, elle va donner 100 lettres
-	*/
-	static Sac creationSac{
-		Sac sacPartie = new Sac();
-		sacPartie.nombreLettre = 100;
-		return sacPartie;
-	}
-}
-	
-	
+ }
