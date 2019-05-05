@@ -1,18 +1,21 @@
-public class test {
+public class Scrabble {
 	public static void main(String[] args) {
- 
-	   // On crée un sac de lettre
-	   SacDeLettres sac = new SacDeLettres();
-	   //on affiche les lettres contenue dans le sac de lettre
-	   String strSac = sac.SacToString();
-	   Ecran.afficher(strSac);
-	   // on crée un chevalet et on le remplit de 7 lettres
-	   Chevalet c = new Chevalet();
-	   c.remplirChevalet(sac);
-	   String strC = c.chevaletToString();
-	   
-	   // on affiche le chevalet et le sac de lettre une fois fini
-	   Ecran.afficher(strC);
-	   Ecran.afficher(strSac);
+
+		// On crée un sac de lettre
+		SacDeLettres sac = new SacDeLettres();
+		// on affiche les lettres contenue dans le sac de lettre
+		String strSac = sac.SacToString();
+		Ecran.afficherln(strSac);
+		// on crée un joueur.
+		Joueur joueur1 = new Joueur(sac);
+
+
+		strSac = sac.SacToString();
+		Ecran.afficherln(strSac);
+		// On crée un plateau 
+		Plateau plateau = new Plateau();
+		// on affiche ce plateau
+		String strPlateau = plateau.plateauToString();
+		System.out.println(strPlateau);
 	}
- }
+}

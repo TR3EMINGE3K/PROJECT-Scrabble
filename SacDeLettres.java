@@ -90,7 +90,7 @@ public class SacDeLettres {
 
     // enlève (remplace par un point) une lettre du sac
     public void viderSac(int indiceSac) {
-        this.sac[indiceSac] = new Lettre();
+        this.sac[indiceSac].car = '.';
     }
 
     // test si le sac est vide afin que les joueurs ne piochent pas dedans

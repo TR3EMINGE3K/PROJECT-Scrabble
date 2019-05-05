@@ -34,6 +34,7 @@ public class Chevalet {
 				} else {
 					chevalet[i] = new Lettre(S.sac[indiceSac].car);
 					S.viderSac(indiceSac);
+					
 				}
 			}
 		}
