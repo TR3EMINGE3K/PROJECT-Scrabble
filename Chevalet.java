@@ -26,7 +26,7 @@ public class Chevalet {
 	// pb : lorsqu'une lettre est tirée elle ne s'enlève pas du sac
 	void remplirChevalet(SacDeLettres S) {
 		int indiceSac = 0;
-		while(!S.estVide()){
+		if(!S.estVide()){
 			for (int i = 0; i < 7; i++) {
 				if (chevalet[i].car == '.') {
 					indiceSac = hasardo(0, 99);
