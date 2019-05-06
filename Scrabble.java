@@ -6,7 +6,7 @@ public class Scrabble {
 		// on affiche les lettres contenue dans le sac de lettre
         String strSac = sac.SacToString();
         
-        	// On crée un plateau 
+        // On crée un plateau 
 		Plateau plateau = new Plateau();
 		// on affiche ce plateau
 		String strPlateau = plateau.plateauToString();
@@ -16,9 +16,15 @@ public class Scrabble {
 		// on crée un joueur.
 		Joueur[] tabJoueurs = Joueur.creerJoueurs(sac);
 		//strSac = sac.SacToString();
-        //Ecran.afficherln(strSac);
-        for(int i=0;i<tabJoueurs.length;i++){
+		//Ecran.afficherln(strSac);
+		int i;
+        for(i=0;i<tabJoueurs.length;i++){
             tabJoueurs[i].placerLettres(sac,plateau);
-        }
+		}
+		Ecran.afficher(tabJoueurs[i].chev.chevaletToString());
+
+		strPlateau = plateau.plateauToString();
+		System.out.println(strPlateau);
+		
 	}
 }

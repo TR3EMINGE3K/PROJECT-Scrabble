@@ -49,89 +49,9 @@ public class Joueur {
     //Cette fonction transforme une minuscule en majuscule et laisse en majuscule si c'en est déjà le cas.
     //Le but est de ne pas compter la saisie d'une minuscule comme une erreur
     static char lettreEnMaj (char a){
-        switch (a){
-            case 'a':
-            case 'A':
-                a = 'A';
-            case 'b':
-            case 'B':
-                a = 'B';
-            case 'c':
-            case 'C':
-                a = 'C';
-            case 'd':
-            case 'D':
-                a = 'D';
-            case 'e':
-            case 'E':
-                a = 'E';
-            case 'f':
-            case 'F':
-                a = 'F';
-            case 'g':
-            case 'G':
-                a = 'G';
-            case 'h':
-            case 'H':
-                a = 'H';
-            case 'i':
-            case 'I':
-                a = 'I';
-            case 'j':
-            case 'J':
-                a = 'J';
-            case 'k':
-            case 'K':
-                a = 'K';
-            case 'l':
-            case 'L':
-                a = 'L';
-            case 'm':
-            case 'M':
-                a = 'M';
-            case 'n':
-            case 'N':
-                a = 'N';
-            case 'o':
-            case 'O':
-                a = 'O';
-            case 'p':
-            case 'P':
-                a = 'P';
-            case 'q':
-            case 'Q':
-                a = 'Q';
-            case 'r':
-            case 'R':
-                a = 'R';
-            case 's':
-            case 'S':
-                a = 'S';
-            case 't':
-            case 'T':
-                a = 'T';
-            case 'u':
-            case 'U':
-                a = 'U';
-            case 'v':
-            case 'V':
-                a = 'V';
-            case 'w':
-            case 'W':
-                a = 'W';
-            case 'x':
-            case 'X':
-                a = 'X';
-            case 'y':
-            case 'Y':
-                a = 'Y';
-            case 'z':
-            case 'Z':
-                a = 'Z';
-            default :
-                a = '*';
-        } 
-        return a;
+        char b;
+        b = Character.toUpperCase(a);
+        return b;
     }
 
     //Placement des lettres sur le plateau: Le joueur va choisir sa case de départ puis une direction. 
