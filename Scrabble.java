@@ -21,7 +21,8 @@ public class Scrabble {
         for(i=0;i<tabJoueurs.length;i++){
             tabJoueurs[i].placerLettres(sac,plateau);
 		}
-		Ecran.afficher(tabJoueurs[i].chev.chevaletToString());
+		String strC = tabJoueurs[i-1].chev.chevaletToString();
+		Ecran.afficherln(strC);
 
 		strPlateau = plateau.plateauToString();
 		System.out.println(strPlateau);

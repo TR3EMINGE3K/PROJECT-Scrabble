@@ -26,18 +26,22 @@ public class Chevalet {
 	// pb : lorsqu'une lettre est tirée elle ne s'enlève pas du sac
 	void remplirChevalet(SacDeLettres S) {
 		int indiceSac = 0;
-		for (int i = 0; i < 7; i++) {
-			if (chevalet[i].car == '.') {
-				indiceSac = hasardo(0, 99);
-				if (S.sac[indiceSac].car == '.') {
-					remplirChevalet(S);
-				} else {
-					chevalet[i] = new Lettre(S.sac[indiceSac].car);
-					S.viderSac(indiceSac);
-					
+		while(!S.estVide()){
+			for (int i = 0; i < 7; i++) {
+				if (chevalet[i].car == '.') {
+					indiceSac = hasardo(0, 99);
+					if (S.sac[indiceSac].car == '.') {
+						remplirChevalet(S);
+					} else {
+						chevalet[i] = new Lettre(S.sac[indiceSac].car);
+						S.viderSac(indiceSac);
+						
+					}
 				}
 			}
+
 		}
+
     }
     
     //vérifie si la lettre demandée existe dans le chevalet.
