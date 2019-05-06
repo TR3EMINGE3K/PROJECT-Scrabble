@@ -59,4 +59,9 @@ public class CaseDePlateau{
                 return ("|"+this.lettre.car+" | ");
             }
         }
+        
+        //vérifie si une case est vide (sera utile pour placer les lettres)
+        public boolean estVide(){
+            return (this.lettre.car=='.');
+        }
 }

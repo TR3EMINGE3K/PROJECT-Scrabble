@@ -38,6 +38,33 @@ public class Chevalet {
 				}
 			}
 		}
-	}
+    }
+    
+    //vérifie si la lettre demandée existe dans le chevalet.
+    boolean lettreDansChevalet(char car){
+        boolean exists= false;
+        for (int i=0; i<chevalet.length;i++){
+            if (car == chevalet[i].car){
+                exists = true;
+            }
+        }
+        return exists;
+    }
+
+    //donne la position de la lettre souhaitée dans le chevalet.
+    int positionDansChevalet(char car){
+        for (int i=0; i<chevalet.length;i++){
+            if (car == chevalet[i].car){
+                return (i);
+            }
+        }
+        return (-1);
+    }
+
+    //retire une lettre souhaitée du chevalet
+    void retirerLettre(int indice){
+        //la lettre est remplacée par un point
+        chevalet[indice]=new Lettre();
+    }
 
 }

@@ -177,10 +177,11 @@ public class Plateau{
             for (int i =10; i<15;i++){
                 str=str +"|"+i+"| ";
             }
+            str=str+"\n";
             return str;
         }
 
-        public void placerLettre(Lettre ltr, int ligne, int colonne){
-            this.tabPlateau[ligne][colonne]= new CaseDePlateau(ltr);
+        public void placerLettre(char ltr, int ligne, int colonne){
+            this.tabPlateau[colonne][ligne]= new CaseDePlateau(new Lettre(ltr));
         }
 }
