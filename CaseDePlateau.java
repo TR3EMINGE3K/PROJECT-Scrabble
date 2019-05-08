@@ -5,6 +5,7 @@ public class CaseDePlateau{
         // le type de la case correspond au fait qu'elle soit classique(cl), mot compte double(m2), lettre triple(l3)...
         public String type;
 
+
         public CaseDePlateau(){
             this.lettre = new Lettre();
             this.type = "cl";

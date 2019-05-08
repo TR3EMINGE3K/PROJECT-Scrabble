@@ -181,7 +181,7 @@ public class Plateau{
             return str;
         }
 
-        public void placerLettre(char ltr, int ligne, int colonne){
+        public void placerLettre(char ltr, int colonne, int ligne){
             this.tabPlateau[colonne][ligne]= new CaseDePlateau(new Lettre(ltr));
         }
 }
