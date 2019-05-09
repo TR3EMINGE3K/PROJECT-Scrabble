@@ -64,7 +64,7 @@ public class Joueur {
         int scoreLettre =0;
 
         // saisie de la position
-        Ecran.afficher("Où voulez vous placer votre première lettre?\n");
+        Ecran.afficher("Où voulez vous placer votre première lettre ",nom," ?\n");
         Ecran.afficher("Quelle Colonne (0,1,2,3...)\n");
         int colonne = Clavier.saisirInt();
         Ecran.afficher("Quelle Ligne (0,1,2,3...)\n");
@@ -116,7 +116,7 @@ public class Joueur {
 
     }
 
-    public void placerLettresBas(Plateau plat, int colonne, int ligne,int scoreLettre) {
+    public void placerLettresBas(Plateau plat, int colonne, int ligne,int scoreLettres) {
 
         Boolean finMot = false;
         Ecran.afficherln("Vous avez décidé d'écrire votre mot vers le bas");
@@ -139,7 +139,7 @@ public class Joueur {
                 
             }
             // placement de la lettre sur le plateau et retirement de la lettre du chevalet
-            scoreLettre = scoreLettre + (ajoutScore(plat, strLET, colonne, ligne));
+            scoreLettres = scoreLettres + (ajoutScore(plat, strLET, colonne, ligne));
             plat.placerLettre(strLET, ligne, colonne);
             chev.retirerLettre(chev.positionDansChevalet(strLET));
 
@@ -160,10 +160,10 @@ public class Joueur {
                     
 
         }
-        Ecran.afficherln("Voilà ton score ", nom," ",scoreLettre); 
+        Ecran.afficherln("Voilà ton score ", nom," ",scoreLettres); 
 
     }
-    public void placerLettresDroite(Plateau plat, int colonne, int ligne,int scoreLettre) {
+    public void placerLettresDroite(Plateau plat, int colonne, int ligne,int scoreLettres) {
 
         Boolean finMot = false;
         Ecran.afficherln("Vous avez décidé d'écrire votre mot vers la droite");
@@ -186,9 +186,11 @@ public class Joueur {
                 
             }
             // placement de la lettre sur le plateau et retirement de la lettre du chevalet
-            scoreLettre = scoreLettre + (ajoutScore(plat, strLET, colonne, ligne));
+            scoreLettres = scoreLettres + (ajoutScore(plat, strLET, colonne, ligne));
+            scoreLettres = scoreLettres + pointsMotHautBas(plat, colonne, ligne, plat.tabPlateau[colonne][ligne].lettre.points);
             plat.placerLettre(strLET, ligne, colonne);
             chev.retirerLettre(chev.positionDansChevalet(strLET));
+            
 
             // Demande de l'action suivante
             switch (colonne){
@@ -206,9 +208,30 @@ public class Joueur {
             }            
 
         }
-        Ecran.afficherln("Voilà ton score ", nom," ",scoreLettre); 
+        Ecran.afficherln("Voilà ton score ", nom," : ",scoreLettres); 
 
     }
+
+    //cette fonction vérifie si, lorsque l'on place un mot horizontal, on en complète un vertical, puis calcule le score ajouté
+    public int pointsMotHautBas(Plateau plat, int colonne, int ligne, /*valeur de la première lettre*/int pts){
+        Boolean finMot = false;
+        String bonusCaseDepart = plat.tabPlateau[colonne][ligne].type;
+        char strLET;
+        //on vérifie si il y a un mot seulement vers le bas:
+        if((plat.tabPlateau[colonne][ligne+1].lettre.car != ' ')&&(plat.tabPlateau[colonne][ligne-1].lettre.car == ' ')){
+            //compte des points à ajouter
+            while ((finMot==false)  && (ligne < 14)) {
+                ligne++;
+                strLET=plat.tabPlateau[colonne][ligne].lettre.car;
+                pts = pts + (ajoutScore(plat, strLET, colonne, ligne));
+                if (ligne + 1 >14){
+                    finMot=true;
+                }
+            }
+        }
+        return pts;
+    }
+
     public int ajoutScore(Plateau plat,char strLET,int colonne, int ligne){
         Lettre letra = new Lettre(strLET);
         int scor;
