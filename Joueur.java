@@ -1,9 +1,21 @@
 public class Joueur {
 
     // Chaque joueur possède un nom et score
-    String nom;
-    int score;
-    Chevalet chev;
+    private String nom;
+    private int score;
+    private Chevalet chev;
+
+    public String getNom(){
+        return nom;
+    }
+
+    public int getScore(){
+        return score;
+    }
+
+    public Chevalet getChev(){
+        return chev;
+    }
 
     // Chaque joueur possède son chevalet
     public Joueur() {
@@ -104,11 +116,11 @@ public class Joueur {
             int ligne = Clavier.saisirInt();
 
             // vérification de la saisie de la position
-            while ((plat.tabPlateau[ligne][colonne].lettre.car != '.') || (ligne < 0) || (colonne < 0) || (colonne > 14)
-                    || (ligne > 14) && ((plat.tabPlateau[ligne + 1][colonne].lettre.car != '.')
-                            || (plat.tabPlateau[ligne - 1][colonne].lettre.car != '.')
-                            || (plat.tabPlateau[ligne][colonne + 1].lettre.car != '.')
-                            || (plat.tabPlateau[ligne][colonne - 1].lettre.car != '.'))) {
+            while ((plat.getTabPlateau()[ligne][colonne].getLettre().getCar() != '.') || (ligne < 0) || (colonne < 0) || (colonne > 14)
+                    || (ligne > 14) && ((plat.getTabPlateau()[ligne + 1][colonne].getLettre().getCar() != '.')
+                            || (plat.getTabPlateau()[ligne - 1][colonne].getLettre().getCar() != '.')
+                            || (plat.getTabPlateau()[ligne][colonne + 1].getLettre().getCar() != '.')
+                            || (plat.getTabPlateau()[ligne][colonne - 1].getLettre().getCar() != '.'))) {
                 Ecran.afficher("Erreur, la case sélectionnée n'est pas valide\n");
                 Ecran.afficher("Quelle ligne (0,1,2,3...)\n");
                 ligne = Clavier.saisirInt();
@@ -165,7 +177,7 @@ public class Joueur {
             }
 
         }
-
+        
     }
 
     public void placerLettresBas(Plateau plat, int colonne, int ligne, int scoreLettre, boolean motDouble,
@@ -198,10 +210,12 @@ public class Joueur {
             chev.retirerLettre(chev.positionDansChevalet(strLET));
 
             // on vérifie qu'il y a mot compte double, compte triple ou compte quadruple
-            if (estMotDouble(plat, colonne, ligne) && (!motDouble)) {
+            if (estMotDouble(plat, colonne, ligne)){
+                if  (!motDouble){ 
                 motDouble = true;
-            } else {
-                motQuadruple = true;
+                }else{
+                    motQuadruple = true;
+                }
             }
             if (estMotTriple(plat, colonne, ligne)) {
                 motTriple = true;
@@ -232,7 +246,7 @@ public class Joueur {
             scoreLettre = scoreLettre * 4;
         }
         Ecran.afficherln("Voilà ton score ", nom, " ", scoreLettre);
-
+        this.score=this.score+scoreLettre;
     }
 
     public void placerLettresDroite(Plateau plat, int colonne, int ligne, int scoreLettre, boolean motDouble,
@@ -267,10 +281,12 @@ public class Joueur {
             chev.retirerLettre(chev.positionDansChevalet(strLET));
 
             // on vérifie qu'il y a mot compte double, compte triple ou compte quadruple
-            if (estMotDouble(plat, colonne, ligne) && (!motDouble)) {
+            if (estMotDouble(plat, colonne, ligne)){
+                if  (!motDouble){ 
                 motDouble = true;
-            } else {
-                motQuadruple = true;
+                }else{
+                    motQuadruple = true;
+                }
             }
             if (estMotTriple(plat, colonne, ligne)) {
                 motTriple = true;
@@ -301,7 +317,7 @@ public class Joueur {
             scoreLettre = scoreLettre * 4;
         }
         Ecran.afficherln("Voilà ton score ", nom, " : ", scoreLettre);
-
+        this.score=this.score+scoreLettre;
     }
 
     /*
@@ -323,11 +339,11 @@ public class Joueur {
         int scor;
 
         if (estDouble(plat, colonne, ligne)) {
-            scor = letra.points * 2;
+            scor = letra.getPoints() * 2;
         } else if (estTriple(plat, colonne, ligne)) {
-            scor = letra.points * 3;
+            scor = letra.getPoints() * 3;
         } else {
-            scor = letra.points;
+            scor = letra.getPoints();
         }
 
         return (scor);
@@ -341,7 +357,7 @@ public class Joueur {
 
     public boolean estDouble(Plateau plat, int colonne, int ligne) {
         boolean estDouble = false;
-        if (plat.tabPlateau[colonne][ligne].type == "l2") {
+        if (plat.getTabPlateau()[colonne][ligne].getType() == "l2") {
             estDouble = true;
         }
         return estDouble;
@@ -349,7 +365,7 @@ public class Joueur {
 
     public boolean estTriple(Plateau plat, int colonne, int ligne) {
         boolean estTriple = false;
-        if (plat.tabPlateau[colonne][ligne].type == "l3") {
+        if (plat.getTabPlateau()[colonne][ligne].getType() == "l3") {
             estTriple = true;
         }
         return estTriple;
@@ -357,7 +373,7 @@ public class Joueur {
 
     public boolean estMotDouble(Plateau plat, int colonne, int ligne) {
         boolean estMotDouble = false;
-        if (plat.tabPlateau[colonne][ligne].type == "m2") {
+        if (plat.getTabPlateau()[colonne][ligne].getType() == "m2") {
             estMotDouble = true;
         }
         return estMotDouble;
@@ -366,7 +382,7 @@ public class Joueur {
 
     public boolean estMotTriple(Plateau plat, int colonne, int ligne) {
         boolean estMotTriple = false;
-        if (plat.tabPlateau[colonne][ligne].type == "m3") {
+        if (plat.getTabPlateau()[colonne][ligne].getType() == "m3") {
             estMotTriple = true;
         }
         return estMotTriple;

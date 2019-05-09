@@ -1,8 +1,20 @@
 public class Lettre {
 
-    public char car;
+    private char car;
 
-    public int points;
+    private int points;
+
+    public char getCar(){
+        return this.car;
+    }    
+
+    public void setCar(char car){
+        this.car=car;
+    }
+
+    public int getPoints(){
+        return points;
+    }    
 
     public Lettre() {
         this.car = '.';
@@ -60,16 +72,6 @@ public class Lettre {
             this.points = 0;
             break;
         }
-    }
-
-    // return la lettre
-    char getCar() {
-        return car;
-    }
-
-    // return la valeur de la lettre
-    int getPoints() {
-        return points;
     }
 
 }

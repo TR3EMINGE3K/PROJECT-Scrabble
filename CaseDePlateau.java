@@ -1,10 +1,17 @@
 public class CaseDePlateau{
         //chaque case sera remplie par une lettre. Au début, la lettre des case est initialisée à '.', et ne sera pas affiché.
-        public Lettre lettre;
+        private Lettre lettre;
 
         // le type de la case correspond au fait qu'elle soit classique(cl), mot compte double(m2), lettre triple(l3)...
-        public String type;
+        private String type;
 
+        public Lettre getLettre(){
+            return lettre;
+        }    
+
+        public String getType(){
+            return type;
+        }    
 
         public CaseDePlateau(){
             this.lettre = new Lettre();
@@ -30,7 +37,7 @@ public class CaseDePlateau{
         public String caseToString(){
             //L'intérieur de la case sera composé de deux charactères, afin qu'elles soient toutes de même taille.
             //si la "lettre" est un point (donc vide), on affichera une case vide avec le type de la case
-            if (this.lettre.car == '.'){
+            if (this.lettre.getCar() == '.'){
                 switch (this.type){
                     //case classique
                     case "cl" :
@@ -57,12 +64,12 @@ public class CaseDePlateau{
                         return ("ERREUR");
                 }
             }else{
-                return ("|"+this.lettre.car+" | ");
+                return ("|"+this.lettre.getCar()+" | ");
             }
         }
         
         //vérifie si une case est vide (sera utile pour placer les lettres)
         public boolean estVide(){
-            return (this.lettre.car=='.');
+            return (this.lettre.getCar()=='.');
         }
 }

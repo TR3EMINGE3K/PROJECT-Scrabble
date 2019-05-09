@@ -1,7 +1,11 @@
 public class SacDeLettres {
 
     // Création d'un tableau de lettre
-    Lettre[] sac;
+    private Lettre[] sac;
+
+    public Lettre[] getSac(){
+        return sac;
+    }    
 
     public SacDeLettres() {
         sac = new Lettre[100];
@@ -90,13 +94,13 @@ public class SacDeLettres {
 
     // enlève (remplace par un point) une lettre du sac
     public void viderSac(int indiceSac) {
-        this.sac[indiceSac].car = '.';
+        this.sac[indiceSac].setCar('.');
     }
 
     // test si le sac est vide afin que les joueurs ne piochent pas dedans
     public boolean estVide(){
         for (int i = 0; i<100;i++){
-            if (this.sac[i].car !='.'){
+            if (this.sac[i].getCar() !='.'){
                 return false; 
             }
 
@@ -109,7 +113,7 @@ public class SacDeLettres {
     String SacToString() {
         String str = " ";
         for (int i = 0; i < 100; i++) {
-            str = str + sac[i].car;
+            str = str + sac[i].getCar();
         }
         return str;
     }

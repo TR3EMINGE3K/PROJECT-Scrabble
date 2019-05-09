@@ -1,6 +1,10 @@
 public class Chevalet {
 
-	Lettre[] chevalet;
+	private Lettre[] chevalet;
+
+	public Lettre[] getChevalet(){
+		return chevalet;
+	}    
 
 	static int hasardo(int b1, int b2) {
 		return ((int) (Math.random() * (b2 - b1 + 1)) + b1);
@@ -16,7 +20,7 @@ public class Chevalet {
 	String chevaletToString() {
 		String str = ("[");
 		for (int i = 0; i < 7; i++) {
-			str = str + " " + chevalet[i].car;
+			str = str + " " + chevalet[i].getCar();
 		}
 		str = str + "]";
 		return str;
@@ -28,12 +32,12 @@ public class Chevalet {
 		int indiceSac = 0;
 		if(!S.estVide()){
 			for (int i = 0; i < 7; i++) {
-				if (chevalet[i].car == '.') {
+				if (chevalet[i].getCar() == '.') {
 					indiceSac = hasardo(0, 99);
-					if (S.sac[indiceSac].car == '.') {
+					if (S.getSac()[indiceSac].getCar() == '.') {
 						remplirChevalet(S);
 					} else {
-						chevalet[i] = new Lettre(S.sac[indiceSac].car);
+						chevalet[i] = new Lettre(S.getSac()[indiceSac].getCar());
 						S.viderSac(indiceSac);
 						
 					}
@@ -48,7 +52,7 @@ public class Chevalet {
     boolean lettreDansChevalet(char car){
         boolean exists= false;
         for (int i=0; i<chevalet.length;i++){
-            if (car == chevalet[i].car){
+            if (car == chevalet[i].getCar()){
                 exists = true;
             }
         }
@@ -58,7 +62,7 @@ public class Chevalet {
     //donne la position de la lettre souhaitée dans le chevalet.
     int positionDansChevalet(char car){
         for (int i=0; i<chevalet.length;i++){
-            if (car == chevalet[i].car){
+            if (car == chevalet[i].getCar()){
                 return (i);
             }
         }

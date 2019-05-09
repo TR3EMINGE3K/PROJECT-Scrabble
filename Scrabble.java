@@ -1,20 +1,21 @@
 public class Scrabble {
 
 	//affiche les scores et déclare le vainqueur à la fin de la partie
-	public void affichageFinDePartie(Joueur[] tabJoueurs){
+	public static void affichageFinDePartie(Joueur[] tabJoueurs){
 		//recherche du vainqueur et affichage des scores
 		int scoreMax=0;
 		int indiceMaxScore=0;
 		for(int i =0;i<tabJoueurs.length;i++){
 			Ecran.afficherln("\n La partie est finie ! \n");
-			Ecran.afficherln("Le score de ",tabJoueurs[i].nom," est de ",tabJoueurs[i].score, "points\n");
-			if (tabJoueurs[i].score>scoreMax){
-				scoreMax=tabJoueurs[i].score;
+			Ecran.afficherln("Le score de ",tabJoueurs[i].getNom()," est de ",tabJoueurs[i].getScore(), "points\n");
+			if (tabJoueurs[i].getScore()>scoreMax){
+				scoreMax=tabJoueurs[i].getScore();
 				indiceMaxScore = i;
 			}
 		}
-		Ecran.afficherln("\n Le grand gagnant est donc ",tabJoueurs[indiceMaxScore].nom,", Bravo!");
+		Ecran.afficherln("\n Le grand gagnant est donc ",tabJoueurs[indiceMaxScore].getNom(),", Bravo!");
 	}
+
 	public static void main(String[] args) {
 
 		//On crée un compteur de tour
@@ -34,11 +35,13 @@ public class Scrabble {
 		Joueur[] tabJoueurs = Joueur.creerJoueurs(sac);
 		//Ecran.afficherln(strSac);
 		//int i;
-		while(!sac.estVide()){
+		//while(!sac.estVide()){
+		int adad=1;
+		while(adad<3){
 			for(int i=0;i<tabJoueurs.length;i++){
 				// On affiche le chevalet du joueur : 
-				Ecran.afficherln("Voici votre chevalet ",tabJoueurs[i].nom);
-				String strC = tabJoueurs[i].chev.chevaletToString();
+				Ecran.afficherln("Voici votre chevalet ",tabJoueurs[i].getNom());
+				String strC = tabJoueurs[i].getChev().chevaletToString();
 				Ecran.afficherln(strC);
 
 				// on fait joueur le joueur
@@ -46,15 +49,17 @@ public class Scrabble {
 				strPlateau = plateau.plateauToString();
 				System.out.println(strPlateau);	
 				// on remplis le chevalet du joueur qui a joué 
-				tabJoueurs[i].chev.remplirChevalet(sac);
+				tabJoueurs[i].getChev().remplirChevalet(sac);
 				compteurTour++;
-			}
+			}adad++;
 		}
 			/*String strC = tabJoueurs[i-1].chev.chevaletToString();
 			Ecran.afficherln(strC);*/
 
 		strPlateau = plateau.plateauToString();
 		System.out.println(strPlateau);
+
+		affichageFinDePartie(tabJoueurs);
 		
 	}
 }

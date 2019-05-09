@@ -1,5 +1,9 @@
 public class Plateau{
-        CaseDePlateau[][] tabPlateau;
+        private CaseDePlateau[][] tabPlateau;
+
+        public CaseDePlateau[][] getTabPlateau(){
+            return tabPlateau;
+        }    
 
         public Plateau(){
             tabPlateau=  new CaseDePlateau[15][15];
