@@ -18,14 +18,9 @@ public class Joueur {
         Ecran.afficher("veuillez entrer votre nom : ");
         this.nom = Clavier.saisirString();
         Ecran.afficherln("Bienvenue ", this.nom);
-        Ecran.afficherln("Voilà votre Chevalet de lettres : ");
 
         // On remplis le chevalet du joueur
         this.chev.remplirChevalet(S);
-        String strC = this.chev.chevaletToString();
-
-        // on affiche le chevalet
-        Ecran.afficherln(strC);
 
     }
 
@@ -59,69 +54,128 @@ public class Joueur {
     // puis une direction.
     // il pourra ensuite ajouter des lettres jusqu'à ce qu'il rencontre des cases
     // non vides ou qu'il sorte du plateau.
-    public void placerLettres(SacDeLettres sac, Plateau plat) {
+    public void placerLettres(SacDeLettres sac, Plateau plat, int compteurTour) {
         char dir;
-        int scoreLettre =0;
+        int scoreLettre = 0;
+
+        Boolean motDouble = false;
+        Boolean motTriple = false;
+        boolean motQuadruple = false;
 
         // saisie de la position
-        Ecran.afficher("Où voulez vous placer votre première lettre ",nom," ?\n");
-        Ecran.afficher("Quelle Colonne (0,1,2,3...)\n");
-        int colonne = Clavier.saisirInt();
-        Ecran.afficher("Quelle Ligne (0,1,2,3...)\n");
-        int ligne = Clavier.saisirInt();
+        if (compteurTour == 1) {
+            Ecran.afficher("Quelle lettre voulez placer en (7,7) ", nom, " ?\n");
+            // saisie de la lettre
+            char strLet = Clavier.saisirChar();
+            char strLET = lettreEnMaj(strLet);
+            // vérification de la saisie de la lettre
+            while (!(chev.lettreDansChevalet(strLET))) {
+                Ecran.afficher("La lettre demandée ne se situe pas dans votre chevalet\n");
+                Ecran.afficher("veuillez saisir une lettre disponible dans votre chevalet\n");
+                strLet = Clavier.saisirChar();
+                strLET = lettreEnMaj(strLet);
+            }
 
-        // vérification de la saisie de la position
-        while ((plat.tabPlateau[ligne][colonne].lettre.car != '.') || (ligne < 0) || (colonne < 0) || (colonne > 14)|| (ligne > 14)) {
-            Ecran.afficher("Erreur, la case sélectionnée n'est pas valide\n");
-            Ecran.afficher("Quelle ligne (0,1,2,3...)\n");
-            ligne = Clavier.saisirInt();
-            Ecran.afficher("Quelle colonne (0,1,2,3...)\n");
-            colonne = Clavier.saisirInt();
-        }
-        Ecran.afficher("Quelle lettre voulez placer en (", colonne, ",", ligne, ") ", nom, " ?\n");
+            // placement de la lettre sur le plateau et retirement de la lettre du chevalet
+            // et ajout du score lettre par lettre
+            scoreLettre = (ajoutScore(plat, strLET, 7, 7));
+            plat.placerLettre(strLET, 7, 7);
+            chev.retirerLettre(chev.positionDansChevalet(strLET));
 
-        // saisie de la lettre
-        char strLet = Clavier.saisirChar();
-        char strLET = lettreEnMaj(strLet);
-        Ecran.afficher(strLET);
-
-        // vérification de la saisie de la lettre
-        while (!(chev.lettreDansChevalet(strLET))) {
-            Ecran.afficher("La lettre demandée ne se situe pas dans votre chevalet\n");
-            Ecran.afficher("veuillez saisir une lettre disponible dans votre chevalet\n");
-            strLet = Clavier.saisirChar();
-            strLET = lettreEnMaj(strLet);
-        }
-
-        // placement de la lettre sur le plateau et retirement de la lettre du chevalet et ajout du score lettre par lettre
-        scoreLettre = (ajoutScore(plat, strLET, colonne, ligne));
-        plat.placerLettre(strLET, ligne, colonne);
-        chev.retirerLettre(chev.positionDansChevalet(strLET));
-
-
-        // On demande au joueur où veut il placer la lettre suivante
-        Ecran.afficherln("Dans quelle direction voulez vous écrire votre mot ? \nTapez 'b' pour écrire en bas et 'd' pour écrire à droite");
-        dir = Clavier.saisirChar();
-        char dire = lettreEnMaj(dir);
-        switch (dire){
+            // On demande au joueur où veut il placer la lettre suivante
+            Ecran.afficherln(
+                    "Dans quelle direction voulez vous écrire votre mot ? \nTapez 'b' pour écrire en bas et 'd' pour écrire à droite");
+            dir = Clavier.saisirChar();
+            char dire = lettreEnMaj(dir);
+            switch (dire) {
             case 'B':
-                placerLettresBas(plat, colonne, ligne,scoreLettre);
-            break;
+                placerLettresBas(plat, 7, 7, scoreLettre,motDouble,motTriple,motTriple);
+                break;
 
             case 'D':
-            placerLettresDroite(plat, colonne, ligne,scoreLettre);
-            break;
+                placerLettresDroite(plat, 7, 7, scoreLettre,motDouble,motTriple,motTriple);
+                break;
+            }
+        } else {
+            Ecran.afficher("Où voulez vous placer votre première lettre ", nom, " ?\n");
+            Ecran.afficher("Quelle Colonne (0,1,2,3...)\n");
+            int colonne = Clavier.saisirInt();
+            Ecran.afficher("Quelle Ligne (0,1,2,3...)\n");
+            int ligne = Clavier.saisirInt();
+
+            // vérification de la saisie de la position
+            while ((plat.tabPlateau[ligne][colonne].lettre.car != '.') || (ligne < 0) || (colonne < 0) || (colonne > 14)
+                    || (ligne > 14) && ((plat.tabPlateau[ligne + 1][colonne].lettre.car != '.')
+                            || (plat.tabPlateau[ligne - 1][colonne].lettre.car != '.')
+                            || (plat.tabPlateau[ligne][colonne + 1].lettre.car != '.')
+                            || (plat.tabPlateau[ligne][colonne - 1].lettre.car != '.'))) {
+                Ecran.afficher("Erreur, la case sélectionnée n'est pas valide\n");
+                Ecran.afficher("Quelle ligne (0,1,2,3...)\n");
+                ligne = Clavier.saisirInt();
+                Ecran.afficher("Quelle colonne (0,1,2,3...)\n");
+                colonne = Clavier.saisirInt();
+
+            }
+            Ecran.afficher("Quelle lettre voulez placer en (", colonne, ",", ligne, ") ", nom, " ?\n");
+
+            // saisie de la lettre
+            char strLet = Clavier.saisirChar();
+            char strLET = lettreEnMaj(strLet);
+
+            // vérification de la saisie de la lettre
+            while (!(chev.lettreDansChevalet(strLET))) {
+                Ecran.afficher("La lettre demandée ne se situe pas dans votre chevalet\n");
+                Ecran.afficher("veuillez saisir une lettre disponible dans votre chevalet\n");
+                strLet = Clavier.saisirChar();
+                strLET = lettreEnMaj(strLet);
+            }
+
+            // placement de la lettre sur le plateau et retirement de la lettre du chevalet
+            // et ajout du score lettre par lettre
+            scoreLettre = (ajoutScore(plat, strLET, colonne, ligne));
+            plat.placerLettre(strLET, ligne, colonne);
+            chev.retirerLettre(chev.positionDansChevalet(strLET));
+
+            // On demande au joueur où veut il placer la lettre suivante
+            Ecran.afficherln(
+                    "Dans quelle direction voulez vous écrire votre mot ? \nTapez 'b' pour écrire en bas et 'd' pour écrire à droite \nTapez 'f' si votre mot est fini");
+            dir = Clavier.saisirChar();
+            char dire = lettreEnMaj(dir);
+            switch (dire) {
+            case 'B':
+                placerLettresBas(plat, colonne, ligne, scoreLettre, motDouble, motTriple, motQuadruple);
+                break;
+
+            case 'D':
+                placerLettresDroite(plat, colonne, ligne, scoreLettre, motDouble, motTriple, motQuadruple);
+                break;
+
+            case 'F':
+                Ecran.afficherln("C'est la fin de votre tour");
+                // on applique le bonus au mot une fois finis
+                if (motDouble) {
+                    scoreLettre = scoreLettre * 2;
+                } else if (motTriple) {
+                    scoreLettre = scoreLettre * 3;
+                } else if (motQuadruple) {
+                    scoreLettre = scoreLettre * 4;
+                }
+                Ecran.afficherln("Voilà ton score ", nom, " : ", scoreLettre);
+                break;
+            }
+
         }
-        
 
     }
 
-    public void placerLettresBas(Plateau plat, int colonne, int ligne,int scoreLettres) {
+    public void placerLettresBas(Plateau plat, int colonne, int ligne, int scoreLettre, boolean motDouble,
+            boolean motTriple,boolean motQuadruple) {
 
         Boolean finMot = false;
+
         Ecran.afficherln("Vous avez décidé d'écrire votre mot vers le bas");
         int compteur = 1;
-        while ((finMot==false) && (compteur < 6) && (ligne < 14)) {
+        while ((finMot == false) && (compteur < 6) && (ligne < 14)) {
             ligne++;
             Ecran.afficherln("Quelle lettre voulez vous placer en (", colonne, ",", ligne, ")", nom, " ?");
 
@@ -136,39 +190,59 @@ public class Joueur {
                 Ecran.afficher("veuillez saisir une lettre disponible dans votre chevalet\n");
                 strLet = Clavier.saisirChar();
                 strLET = lettreEnMaj(strLet);
-                
+
             }
             // placement de la lettre sur le plateau et retirement de la lettre du chevalet
-            scoreLettres = scoreLettres + (ajoutScore(plat, strLET, colonne, ligne));
+            scoreLettre = scoreLettre + (ajoutScore(plat, strLET, colonne, ligne));
             plat.placerLettre(strLET, ligne, colonne);
             chev.retirerLettre(chev.positionDansChevalet(strLET));
 
-            // Demande de l'action suivante
-            switch (ligne){
-                case 14 :
-                    finMot = true;
-                break;
-                default :
-                    Ecran.afficherln("Votre mot est-il fini ?\n Tapez 'o' pour oui et 'n' pour non : ");
-                    char choix = Clavier.saisirChar();
-                    if (choix == 'o'){
-                        finMot = true; 
-                    }
-                break;   
+            // on vérifie qu'il y a mot compte double, compte triple ou compte quadruple
+            if (estMotDouble(plat, colonne, ligne) && (!motDouble)) {
+                motDouble = true;
+            } else {
+                motQuadruple = true;
+            }
+            if (estMotTriple(plat, colonne, ligne)) {
+                motTriple = true;
+            }
 
-            }   
-                    
+            // Demande de l'action suivante
+            switch (ligne) {
+            case 14:
+                finMot = true;
+                break;
+            default:
+                Ecran.afficherln("Votre mot est-il fini ?\n Tapez 'o' pour oui et 'n' pour non : ");
+                char choix = Clavier.saisirChar();
+                if (choix == 'o') {
+                    finMot = true;
+                }
+                break;
+
+            }
 
         }
-        Ecran.afficherln("Voilà ton score ", nom," ",scoreLettres); 
+        // on applique le bonus au mot une fois finis
+        if (motDouble) {
+            scoreLettre = scoreLettre * 2;
+        } else if (motTriple) {
+            scoreLettre = scoreLettre * 3;
+        } else if (motQuadruple) {
+            scoreLettre = scoreLettre * 4;
+        }
+        Ecran.afficherln("Voilà ton score ", nom, " ", scoreLettre);
 
     }
-    public void placerLettresDroite(Plateau plat, int colonne, int ligne,int scoreLettres) {
+
+    public void placerLettresDroite(Plateau plat, int colonne, int ligne, int scoreLettre, boolean motDouble,
+    boolean motTriple,boolean motQuadruple) {
 
         Boolean finMot = false;
+
         Ecran.afficherln("Vous avez décidé d'écrire votre mot vers la droite");
         int compteur = 1;
-        while ((finMot==false) && (compteur < 6) && (colonne < 14)) {
+        while ((finMot == false) && (compteur < 6) && (colonne < 14)) {
             colonne++;
             Ecran.afficherln("Quelle lettre voulez vous placer en (", colonne, ",", ligne, ")", nom, " ?");
 
@@ -183,89 +257,120 @@ public class Joueur {
                 Ecran.afficher("veuillez saisir une lettre disponible dans votre chevalet\n");
                 strLet = Clavier.saisirChar();
                 strLET = lettreEnMaj(strLet);
-                
+
             }
             // placement de la lettre sur le plateau et retirement de la lettre du chevalet
-            scoreLettres = scoreLettres + (ajoutScore(plat, strLET, colonne, ligne));
-            scoreLettres = scoreLettres + pointsMotHautBas(plat, colonne, ligne, plat.tabPlateau[colonne][ligne].lettre.points);
+            scoreLettre = scoreLettre + (ajoutScore(plat, strLET, colonne, ligne));
+            //scoreLettre = scoreLettre
+                    //+ pointsMotHautBas(plat, colonne, ligne, plat.tabPlateau[colonne][ligne].lettre.points);
             plat.placerLettre(strLET, ligne, colonne);
             chev.retirerLettre(chev.positionDansChevalet(strLET));
-            
+
+            // on vérifie qu'il y a mot compte double, compte triple ou compte quadruple
+            if (estMotDouble(plat, colonne, ligne) && (!motDouble)) {
+                motDouble = true;
+            } else {
+                motQuadruple = true;
+            }
+            if (estMotTriple(plat, colonne, ligne)) {
+                motTriple = true;
+            }
 
             // Demande de l'action suivante
-            switch (colonne){
-                case 14 :
-                    finMot = true;
+            switch (colonne) {
+            case 14:
+                finMot = true;
                 break;
-                default :
-                    Ecran.afficherln("Votre mot est-il fini ?\n Tapez 'o' pour oui et 'n' pour non : ");
-                    char choix = Clavier.saisirChar();
-                    if (choix == 'o'){
-                        finMot = true; 
-                    }
-                break;   
-
-            }            
-
-        }
-        Ecran.afficherln("Voilà ton score ", nom," : ",scoreLettres); 
-
-    }
-
-    //cette fonction vérifie si, lorsque l'on place un mot horizontal, on en complète un vertical, puis calcule le score ajouté
-    public int pointsMotHautBas(Plateau plat, int colonne, int ligne, /*valeur de la première lettre*/int pts){
-        Boolean finMot = false;
-        String bonusCaseDepart = plat.tabPlateau[colonne][ligne].type;
-        char strLET;
-        //on vérifie si il y a un mot seulement vers le bas:
-        if((plat.tabPlateau[colonne][ligne+1].lettre.car != ' ')&&(plat.tabPlateau[colonne][ligne-1].lettre.car == ' ')){
-            //compte des points à ajouter
-            while ((finMot==false)  && (ligne < 14)) {
-                ligne++;
-                strLET=plat.tabPlateau[colonne][ligne].lettre.car;
-                pts = pts + (ajoutScore(plat, strLET, colonne, ligne));
-                if (ligne + 1 >14){
-                    finMot=true;
+            default:
+                Ecran.afficherln("Votre mot est-il fini ?\n Tapez 'o' pour oui et 'n' pour non : ");
+                char choix = Clavier.saisirChar();
+                if (choix == 'o') {
+                    finMot = true;
                 }
+                break;
+
             }
+
         }
-        return pts;
+        // on applique le bonus au mot une fois finis
+        if (motDouble) {
+            scoreLettre = scoreLettre * 2;
+        } else if (motTriple) {
+            scoreLettre = scoreLettre * 3;
+        } else if (motQuadruple) {
+            scoreLettre = scoreLettre * 4;
+        }
+        Ecran.afficherln("Voilà ton score ", nom, " : ", scoreLettre);
+
     }
 
-    public int ajoutScore(Plateau plat,char strLET,int colonne, int ligne){
+    /*
+     * cette fonction vérifie si, lorsque l'on place un mot horizontal, on en
+     * complète un vertical, puis calcule le score ajouté public int
+     * pointsMotHautBas(Plateau plat, int colonne, int ligne, valeur de la première
+     * lettreint pts){ Boolean finMot = false; String bonusCaseDepart =
+     * plat.tabPlateau[colonne][ligne].type; char strLET; //on vérifie si il y a un
+     * mot seulement vers le bas: if((plat.tabPlateau[colonne][ligne+1].lettre.car
+     * != ' ')&&(plat.tabPlateau[colonne][ligne-1].lettre.car == ' ')){ //compte des
+     * points à ajouter while ((finMot==false) && (ligne < 14)) { ligne++;
+     * strLET=plat.tabPlateau[colonne][ligne].lettre.car; pts = pts +
+     * (ajoutScore(plat, strLET, colonne, ligne)); if (ligne + 1 >14){ finMot=true;
+     * } } } return pts; }
+     */
+
+    public int ajoutScore(Plateau plat, char strLET, int colonne, int ligne) {
         Lettre letra = new Lettre(strLET);
         int scor;
-        
-        if (estDouble(plat,colonne,ligne)){
-            scor =letra.points*2;
+
+        if (estDouble(plat, colonne, ligne)) {
+            scor = letra.points * 2;
+        } else if (estTriple(plat, colonne, ligne)) {
+            scor = letra.points * 3;
+        } else {
+            scor = letra.points;
         }
-        else if(estTriple(plat,colonne, ligne)){
-            scor =letra.points*3;
-        }
-        else {
-            scor=letra.points;
-        }
-        
-        return(scor);
+
+        return (scor);
 
     }
-    public int ComptageScore(int score){
-        int multiplicateur=0;
-        return(score * multiplicateur);
+
+    public int ComptageScore(int score) {
+        int multiplicateur = 0;
+        return (score * multiplicateur);
     }
-    public boolean estDouble(Plateau plat,int colonne,int ligne){
+
+    public boolean estDouble(Plateau plat, int colonne, int ligne) {
         boolean estDouble = false;
-        if(plat.tabPlateau[colonne][ligne].type == "l2"){
+        if (plat.tabPlateau[colonne][ligne].type == "l2") {
             estDouble = true;
         }
         return estDouble;
     }
-    public boolean estTriple(Plateau plat,int colonne,int ligne){
+
+    public boolean estTriple(Plateau plat, int colonne, int ligne) {
         boolean estTriple = false;
-        if(plat.tabPlateau[colonne][ligne].type == "l3"){
+        if (plat.tabPlateau[colonne][ligne].type == "l3") {
             estTriple = true;
         }
         return estTriple;
+    }
+
+    public boolean estMotDouble(Plateau plat, int colonne, int ligne) {
+        boolean estMotDouble = false;
+        if (plat.tabPlateau[colonne][ligne].type == "m2") {
+            estMotDouble = true;
+        }
+        return estMotDouble;
+
+    }
+
+    public boolean estMotTriple(Plateau plat, int colonne, int ligne) {
+        boolean estMotTriple = false;
+        if (plat.tabPlateau[colonne][ligne].type == "m3") {
+            estMotTriple = true;
+        }
+        return estMotTriple;
+
     }
 
 }
