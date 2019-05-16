@@ -1,5 +1,22 @@
 public class Scrabble {
 
+	/*static class position{
+		int colonne;
+		int ligne;
+	}
+
+	//tableau qui prend les positions des lettres du mot qui est en train d'être inséré dans le plateau.
+	position[] posMotActuel = new position[7];
+
+	//initialisation de ce tableau
+	//on initialise avec des valeurs imposibles à obtenir en plaçant les lettres
+	public static void initialisationTabPosMot (position[] posMotActuel){
+		for(int i = 0; i<7 ; i++){
+			posMotActu[i].colonne = 20;
+			posMotActu[i].ligne = 20;
+		}
+	}	*/
+	
 	//affiche les scores et déclare le vainqueur à la fin de la partie
 	public static void affichageFinDePartie(Joueur[] tabJoueurs){
 		//recherche du vainqueur et affichage des scores

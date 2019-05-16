@@ -66,7 +66,7 @@ public class Joueur {
     // puis une direction.
     // il pourra ensuite ajouter des lettres jusqu'à ce qu'il rencontre des cases
     // non vides ou qu'il sorte du plateau.
-    public void placerLettres(SacDeLettres sac, Plateau plat, int compteurTour) {
+    public void placerLettres( SacDeLettres sac, Plateau plat, int compteurTour) {
         char dir;
         int scoreLettre = 0;
 
@@ -76,6 +76,11 @@ public class Joueur {
 
         // saisie de la position
         if (compteurTour == 1) {
+            /*//indique qu'une lettre de ce mot se trouve en 7,7
+            posMotActu[0].colonne = 7;
+            posMotActu[0].ligne = 7;
+*/
+            motDouble=true;
             Ecran.afficher("Quelle lettre voulez placer en (7,7) ", nom, " ?\n");
             // saisie de la lettre
             char strLet = Clavier.saisirChar();
@@ -181,14 +186,31 @@ public class Joueur {
     }
 
     public void placerLettresBas(Plateau plat, int colonne, int ligne, int scoreLettre, boolean motDouble,
-            boolean motTriple,boolean motQuadruple) {
-
+                boolean motTriple,boolean motQuadruple) {
+        boolean motBienPlace = false;
         Boolean finMot = false;
 
         Ecran.afficherln("Vous avez décidé d'écrire votre mot vers le bas");
+        
         int compteur = 1;
         while ((finMot == false) && (compteur < 6) && (ligne < 14)) {
             ligne++;
+            
+            /*posMotActu[compteur].colonne = colonne;
+            posMotActu[compteur].ligne = ligne;
+*/
+            // on vérifie qu'il y a mot compte double, compte triple ou compte quadruple
+            if (estMotDouble(plat, colonne, ligne)){
+                if  (!motDouble){ 
+                motDouble = true;
+                }else{
+                    motQuadruple = true;
+                }
+            }
+            if (estMotTriple(plat, colonne, ligne)) {
+                motTriple = true;
+            }
+
             Ecran.afficherln("Quelle lettre voulez vous placer en (", colonne, ",", ligne, ")", nom, " ?");
 
             // on Saisi une lettre
@@ -208,18 +230,6 @@ public class Joueur {
             scoreLettre = scoreLettre + (ajoutScore(plat, strLET, colonne, ligne));
             plat.placerLettre(strLET, ligne, colonne);
             chev.retirerLettre(chev.positionDansChevalet(strLET));
-
-            // on vérifie qu'il y a mot compte double, compte triple ou compte quadruple
-            if (estMotDouble(plat, colonne, ligne)){
-                if  (!motDouble){ 
-                motDouble = true;
-                }else{
-                    motQuadruple = true;
-                }
-            }
-            if (estMotTriple(plat, colonne, ligne)) {
-                motTriple = true;
-            }
 
             // Demande de l'action suivante
             switch (ligne) {
@@ -258,6 +268,20 @@ public class Joueur {
         int compteur = 1;
         while ((finMot == false) && (compteur < 6) && (colonne < 14)) {
             colonne++;
+            /*posMotActu[compteur].colonne = colonne;
+            posMotActu[compteur].ligne = ligne;*/
+            // on vérifie qu'il y a mot compte double, compte triple ou compte quadruple
+            if (estMotDouble(plat, colonne, ligne)){
+                if  (!motDouble){ 
+                motDouble = true;
+                }else{
+                    motQuadruple = true;
+                }
+            }
+            if (estMotTriple(plat, colonne, ligne)) {
+                motTriple = true;
+            }
+
             Ecran.afficherln("Quelle lettre voulez vous placer en (", colonne, ",", ligne, ")", nom, " ?");
 
             // on Saisi une lettre
@@ -279,18 +303,6 @@ public class Joueur {
                     //+ pointsMotHautBas(plat, colonne, ligne, plat.tabPlateau[colonne][ligne].lettre.points);
             plat.placerLettre(strLET, ligne, colonne);
             chev.retirerLettre(chev.positionDansChevalet(strLET));
-
-            // on vérifie qu'il y a mot compte double, compte triple ou compte quadruple
-            if (estMotDouble(plat, colonne, ligne)){
-                if  (!motDouble){ 
-                motDouble = true;
-                }else{
-                    motQuadruple = true;
-                }
-            }
-            if (estMotTriple(plat, colonne, ligne)) {
-                motTriple = true;
-            }
 
             // Demande de l'action suivante
             switch (colonne) {
