@@ -140,6 +140,13 @@ public class Joueur {
                     "Dans quelle direction voulez vous ecrire votre mot ? \nTapez 'b' pour ecrire en bas et 'd' pour ecrire a droite");
             dir = Clavier.saisirChar();
             char dire = lettreEnMaj(dir);
+            while (dire != 'B' && dire != 'D'){
+                Ecran.afficherln(
+                    "ERREUR : vous n'avez pas tapez une lettre designant une action : recommencez : \nDans quelle direction voulez vous ecrire votre mot ? \nTapez 'b' pour ecrire en bas et 'd' pour ecrire a droite.");
+                dir = Clavier.saisirChar();
+                dire = lettreEnMaj(dir);
+
+            }
             switch (dire) {
             case 'B':
                 placerLettresBas(plat, 7, 7, scoreLettre,motDouble,motTriple,motTriple);
@@ -194,6 +201,14 @@ public class Joueur {
                     "Dans quelle direction voulez vous ecrire votre mot ? \nTapez 'b' pour ecrire en bas et 'd' pour ecrire a droite \nTapez 'f' si votre mot est fini");
             dir = Clavier.saisirChar();
             char dire = lettreEnMaj(dir);
+            while (dire != 'B' && dire != 'F'&& dire != 'D'){
+                Ecran.afficherln(
+                    "ERREUR : vous n'avez pas tapez une lettre designant une action : recommencez : \nDans quelle direction voulez vous ecrire votre mot ? \nTapez 'b' pour ecrire en bas et 'd' pour ecrire a droite \nTapez 'f' si votre mot est fini");
+                dir = Clavier.saisirChar();
+                dire = lettreEnMaj(dir);
+
+            }
+            
             switch (dire) {
             case 'B':
                 placerLettresBas(plat, colonne, ligne, scoreLettre, motDouble, motTriple, motQuadruple);
@@ -245,9 +260,12 @@ public class Joueur {
             
             ligne++;
             boolean estVide = false;
+            int scoreEntreMot=0;
             while (estVide==false){
                 if (!(plat.getTabPlateau()[ligne][colonne].estVide())){
+                    scoreEntreMot = scoreEntreMot + plat.getTabPlateau()[ligne][colonne].getLettre().getPoints();
                     ligne++;
+                    
                     
                 }
                 else {
@@ -284,7 +302,7 @@ public class Joueur {
 
             }
             // placement de la lettre sur le plateau et retirement de la lettre du chevalet
-            scoreLettre = scoreLettre + (ajoutScore(plat, strLET, colonne, ligne));
+            scoreLettre = scoreLettre + (ajoutScore(plat, strLET, colonne, ligne))+ scoreEntreMot;
             plat.placerLettre(strLET, ligne, colonne);
             chev.retirerLettre(chev.positionDansChevalet(strLET));
 
@@ -294,9 +312,18 @@ public class Joueur {
                 finMot = true;
                 break;
             default:
+                
                 Ecran.afficherln("Votre mot est-il fini ?\n Tapez 'o' pour oui et 'n' pour non : ");
                 char choix = Clavier.saisirChar();
-                if (choix == 'o') {
+                char choixMaj = lettreEnMaj(choix)
+                while (choixMaj != 'O' && choixMaj !='N'){
+                    Ecran.afficherln(
+                        "ERREUR : vous n'avez pas tapez une lettre designant une action : recommencez : \nVotre mot est-il fini ?\n Tapez 'o' pour oui et 'n' pour non : ");
+                        choix = Clavier.saisirChar();
+                        choixMaj = lettreEnMaj(choix);
+
+                }
+                if (choixMaj == 'O') {
                     finMot = true;
                 }
                 break;
@@ -337,9 +364,12 @@ public class Joueur {
         while ((finMot == false) && (compteur < 6) && (colonne < 14)) {
             colonne++;
             boolean estVide = false;
+            int scoreEntreMot=0;
             while (estVide==false){
                 if (!(plat.getTabPlateau()[ligne][colonne].estVide())){
+                    scoreEntreMot = scoreEntreMot + plat.getTabPlateau()[ligne][colonne].getLettre().getPoints();
                     colonne++;
+                    
                     
                 }
                 else {
@@ -374,7 +404,8 @@ public class Joueur {
 
             }
             // placement de la lettre sur le plateau et retirement de la lettre du chevalet
-            scoreLettre = scoreLettre + (ajoutScore(plat, strLET, colonne, ligne));
+            scoreLettre = scoreLettre + (ajoutScore(plat, strLET, colonne, ligne)) + scoreEntreMot;
+
             //scoreLettre = scoreLettre
                     //+ pointsMotHautBas(plat, colonne, ligne, plat.tabPlateau[colonne][ligne].lettre.points);
             plat.placerLettre(strLET, ligne, colonne);
@@ -388,7 +419,15 @@ public class Joueur {
             default:
                 Ecran.afficherln("Votre mot est-il fini ?\n Tapez 'o' pour oui et 'n' pour non : ");
                 char choix = Clavier.saisirChar();
-                if (choix == 'o') {
+                char choixMaj = lettreEnMaj(choix)
+                while (choixMaj != 'O' && choixMaj !='N'){
+                    Ecran.afficherln(
+                        "ERREUR : vous n'avez pas tapez une lettre designant une action : recommencez : \nVotre mot est-il fini ?\n Tapez 'o' pour oui et 'n' pour non : ");
+                    choix = Clavier.saisirChar();
+                    choixMaj = lettreEnMaj(choix);
+
+                }
+                if (choixMaj == 'O') {
                     finMot = true;
                 }
                 break;
