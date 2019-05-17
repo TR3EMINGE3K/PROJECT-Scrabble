@@ -8,15 +8,15 @@
 public class Lettre {
 
     /**
-    * Elle est composée d'un caractère et d'une valeur (points).
+    * Elle est composee d'un caractere et d'une valeur (points).
     */
     private char car;
 
     private int points;
 
     /**
-	* Méthode qui permet d'obtenir le caractère de la Lettre.
-	* @return car, le caractère de la Lettre.
+	* Methode qui permet d'obtenir le caractere de la Lettre.
+	* @return car, le caractere de la Lettre.
 	*/
     public char getCar(){
         return this.car;
@@ -24,15 +24,15 @@ public class Lettre {
 
 
     /**
-	* Méthode qui permet de donner au caractère de la classe un caractère.(nécessaire puisque car est en private)
-	* @param car , le caractère que l'on veut affecter.
+	* Methode qui permet de donner au caractere de la classe un caractere.(necessaire puisque car est en private)
+	* @param car , le caractere que l'on veut affecter.
 	*/
     public void setCar(char car){
         this.car=car;
     }
 
     /**
-	* Méthode qui permet d'obtenir la valeur d'une lettre.
+	* Methode qui permet d'obtenir la valeur d'une lettre.
 	* @return points, le valeur de la Lettre.
 	*/
     public int getPoints(){
@@ -40,7 +40,7 @@ public class Lettre {
     }    
 
     /**
-	* Le constructeur de la lettre, il l'initialise avec un caractère égale à '.' et a une valeur de 0.
+	* Le constructeur de la lettre, il l'initialise avec un caractere egale a '.' et a une valeur de 0.
 	*/
     public Lettre() {
         this.car = '.';
@@ -49,8 +49,8 @@ public class Lettre {
 
     
     /**
-    * Le constructeur surchargé de Lettre(), il va donner une valeur selon son entrée.
-    * @param car, le caractère qui va permettre d'affecter une valeur à la lettre.
+    * Le constructeur surcharge de Lettre(), il va donner une valeur selon son entree.
+    * @param car, le caractere qui va permettre d'affecter une valeur a la lettre.
 	*/
     public Lettre(char car) {
         this.car = car;

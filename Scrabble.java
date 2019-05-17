@@ -1,34 +1,17 @@
 // Medhi Louison, Antoine Claudel, I2 CMI informatique 
 
 /**
-* Un jeu de Scrabble de 1 à 4 joueurs.
+* Un jeu de Scrabble de 1 a 4 joueurs.
 */
 
 
 public class Scrabble {
 
-	/*static class position{
-		int colonne;
-		int ligne;
-	}
-
-	//tableau qui prend les positions des lettres du mot qui est en train d'être inséré dans le plateau.
-	position[] posMotActuel = new position[7];
-
-	//initialisation de ce tableau
-	//on initialise avec des valeurs imposibles à obtenir en plaçant les lettres
-	public static void initialisationTabPosMot (position[] posMotActuel){
-		for(int i = 0; i<7 ; i++){
-			posMotActu[i].colonne = 20;
-			posMotActu[i].ligne = 20;
-		}
-	}	*/
-	
 
 
 	
 	/**
-	* Affiche les scores et déclare le vainqueur à la fin de la partie
+	* Affiche les scores et declare le vainqueur a la fin de la partie
 	*
 	* @param tabJoueurs , un tableau comportant tout les joueurs de la partie.
 	* 
@@ -37,7 +20,7 @@ public class Scrabble {
 		//recherche du vainqueur et affichage des scores
 
 		/**
-		* On dit que le scoreMax de base est à 0 ainsi que son indice.
+		* On dit que le scoreMax de base est a 0 ainsi que son indice.
 		*/
 		int scoreMax=0;
 		int indiceMaxScore=0;
@@ -56,14 +39,14 @@ public class Scrabble {
 
 	public static void main(String[] args) {
 
-		//On crée un compteur de tour
+		//On cree un compteur de tour
 		int compteurTour = 1;
 
-		// On crée un sac de lettre
+		// On cree un sac de lettre
 		SacDeLettres sac = new SacDeLettres();
 		// on affiche les lettres contenue dans le sac de lettre
         //String strSac = sac.SacToString();
-        // On crée un plateau 
+        // On cree un plateau 
 		Plateau plateau = new Plateau();
 		// on affiche ce plateau
 		String strPlateau = plateau.plateauToString();
@@ -86,7 +69,7 @@ public class Scrabble {
 				tabJoueurs[i].placerLettres(sac,plateau,compteurTour);
 				strPlateau = plateau.plateauToString();
 				System.out.println(strPlateau);	
-				// on remplis le chevalet du joueur qui a joué 
+				// on remplis le chevalet du joueur qui a joue 
 				tabJoueurs[i].getChev().remplirChevalet(sac);
 				compteurTour++;
 			}adad++;

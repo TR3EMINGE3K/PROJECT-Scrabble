@@ -8,13 +8,13 @@
 public class CaseDePlateau{
         
         /**
-        * Chaque case est constiutée d'une lettre et d'un type (mot ou lettre compte double etc.)
+        * Chaque case est constiutee d'une lettre et d'un type (mot ou lettre compte double etc.)
         */
         private Lettre lettre;
         private String type;
 
         /**
-	    * Méthode qui permet d'obtenir la lettre de la case.
+	    * Methode qui permet d'obtenir la lettre de la case.
 	    * @return lettre, la Lettre de la case.
 	    */
         public Lettre getLettre(){
@@ -22,7 +22,7 @@ public class CaseDePlateau{
         }    
 
         /**
-	    * Méthode qui permet d'obtenir la lettre de la case.
+	    * Methode qui permet d'obtenir la lettre de la case.
 	    * @return lettre, la Lettre de la case.
 	    */
         public String getType(){
@@ -30,7 +30,7 @@ public class CaseDePlateau{
         }    
 
         /**
-	    * Constructeur de la case, il initialise la lettre. Son type est défini comme classique : il n'est donc pas un bonus.
+	    * Constructeur de la case, il initialise la lettre. Son type est defini comme classique : il n'est donc pas un bonus.
 	    */
         public CaseDePlateau(){
             this.lettre = new Lettre();
@@ -38,8 +38,8 @@ public class CaseDePlateau{
         }
 
         /**
-        * Constructeur surchargé de CaseDePlateau(), il donne à la lettre de la case la lettre qui est en entrée. Son type est défini comme classique.
-        * @param let , la Lettre qui va être donnée à la letre de case.
+        * Constructeur surcharge de CaseDePlateau(), il donne a la lettre de la case la lettre qui est en entree. Son type est defini comme classique.
+        * @param let , la Lettre qui va être donnee a la letre de case.
 	    */
         public CaseDePlateau(Lettre let){
             this.lettre = let;
@@ -47,8 +47,8 @@ public class CaseDePlateau{
         }
 
         /**
-        * Constructeur surchargé de CaseDePlateau(), il initialise la lettre. Son type est défini grâce à l'entrée.
-        * @param str , le type qui va être donné à la classe.
+        * Constructeur surcharge de CaseDePlateau(), il initialise la lettre. Son type est defini grâce a l'entree.
+        * @param str , le type qui va être donne a la classe.
 	    */
         public CaseDePlateau(String str){
             this.lettre = new Lettre();
@@ -56,9 +56,9 @@ public class CaseDePlateau{
         }
 
         /**
-        * Constructeur surchargé de CaseDePlateau(), il donne à la lettre de la case la lettre qui est en entrée. Son type est défini grâce à l'entrée.
-        * @param str , le type qui va être donné à la classe.
-        * @param let , la Lettre qui va être donnée à la letre de case.
+        * Constructeur surcharge de CaseDePlateau(), il donne a la lettre de la case la lettre qui est en entree. Son type est defini grâce a l'entree.
+        * @param str , le type qui va être donne a la classe.
+        * @param let , la Lettre qui va être donnee a la letre de case.
 	    */
         public CaseDePlateau(String str, Lettre let){
             this.lettre = let;
@@ -66,11 +66,11 @@ public class CaseDePlateau{
         }
 
         /**
-        * Méthode permettant de construire une chaine de caractère représentant la case
-        * @return la case crée.
+        * Methode permettant de construire une chaine de caractere representant la case
+        * @return la case cree.
 	    */
         public String caseToString(){
-            //L'intérieur de la case sera composé de deux charactères, afin qu'elles soient toutes de même taille.
+            //L'interieur de la case sera compose de deux characteres, afin qu'elles soient toutes de même taille.
             //si la "lettre" est un point (donc vide), on affichera une case vide avec le type de la case
             if (this.lettre.getCar() == '.'){
                 switch (this.type){
@@ -94,7 +94,7 @@ public class CaseDePlateau{
                     case "m3":
                         return ("|M3| ");
 
-                    //afin de vérifier si il y a une erreur dans le code
+                    //afin de verifier si il y a une erreur dans le code
                     default :
                         return ("ERREUR");
                 }
@@ -104,8 +104,8 @@ public class CaseDePlateau{
         }
         
         /**
-        * Méthode qui vérifie qu'une case est vide pour pouvoir y placer une lettre.
-        * @return true ou false dépendant de l'état de la case. 
+        * Methode qui verifie qu'une case est vide pour pouvoir y placer une lettre.
+        * @return true ou false dependant de l'etat de la case. 
 	    */
         public boolean estVide(){
             return (this.lettre.getCar()=='.');

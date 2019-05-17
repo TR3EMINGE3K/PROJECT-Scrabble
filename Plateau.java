@@ -8,12 +8,12 @@
 public class Plateau{
 
         /**
-        * Un plateau est formé d'un tableau à 2 dimensions de type CaseDePlateau
+        * Un plateau est forme d'un tableau a 2 dimensions de type CaseDePlateau
         */
         private CaseDePlateau[][] tabPlateau;
 
         /**
-        * Méthode permettant d'obtenir le tableau du Plateau.
+        * Methode permettant d'obtenir le tableau du Plateau.
         * @return tabPlateau, le tableau du Plateau.
         */
         public CaseDePlateau[][] getTabPlateau(){
@@ -22,16 +22,16 @@ public class Plateau{
 
 
         /**
-	    * Constructeur du plateau, il initialise le tableau comme étant un tableau de 15x15. Il remplit ensuite chaque case de ce plateau fidèlement aux règles.
+	    * Constructeur du plateau, il initialise le tableau comme etant un tableau de 15x15. Il remplit ensuite chaque case de ce plateau fidelement aux regles.
 	    */
         public Plateau(){
             tabPlateau=  new CaseDePlateau[15][15];
-            //i correspond à la colonne et j à la ligne.
+            //i correspond a la colonne et j a la ligne.
             int i, j;
 
             for (i=0;i<15;i++){
                 for(j=0;j<15;j++){
-                    //première et dernière ligne
+                    //premiere et derniere ligne
                     if ((j==0)||(j==14)){
                         switch (i){
                             case 0:
@@ -51,7 +51,7 @@ public class Plateau{
                         }
                     }
                     
-                    //deuxième et 14ème ligne
+                    //deuxieme et 14eme ligne
                     if((j==1)||(j==13)){
                         switch (i){
                             case 1:
@@ -70,7 +70,7 @@ public class Plateau{
                         }
                     }
 
-                    //3ème et 13ème ligne
+                    //3eme et 13eme ligne
                     if((j==2)||(j==12)){
                         switch (i){
                             case 2:
@@ -89,7 +89,7 @@ public class Plateau{
                         }
                     }
                     
-                    //4ème et 12ème ligne
+                    //4eme et 12eme ligne
                     if((j==3)||(j==11)){
                         switch (i){
                             case 0:
@@ -108,7 +108,7 @@ public class Plateau{
                         }
                     }
 
-                    //5ème et 11ème ligne
+                    //5eme et 11eme ligne
                     if((j==4)||(j==10)){
                         switch (i){
                             case 4:
@@ -122,7 +122,7 @@ public class Plateau{
                         }
                     }
 
-                    //6ème et 10ème ligne
+                    //6eme et 10eme ligne
                     if((j==5)||(j==9)){
                         switch (i){
                             case 1:
@@ -138,7 +138,7 @@ public class Plateau{
                         }
                     }
 
-                    //7ème et 9ème ligne
+                    //7eme et 9eme ligne
                     if((j==6)||(j==8)){
                         switch (i){
                             case 2:
@@ -154,7 +154,7 @@ public class Plateau{
                         }
                     }
 
-                    //8ème ligne
+                    //8eme ligne
                     if(j==7){
                         switch (i){
                             case 0:
@@ -176,8 +176,8 @@ public class Plateau{
             }
         }
         /**
-        * Méthode permettant de construire une chaine de caractère représentant le plateau.
-        * @return str, la chaine qui représente le plateau .
+        * Methode permettant de construire une chaine de caractere representant le plateau.
+        * @return str, la chaine qui represente le plateau .
 	    */
         public String plateauToString(){
             String str= "";
@@ -208,10 +208,10 @@ public class Plateau{
         }
 
         /**
-        * Méthode permettant de placer une lettre sur le plateau
-        * @param ltr , le caractère qui sera affiché
-        * @param colonne , la colonne du tableau qui représente le plateau.
-        * @param ltr , la ligne du tableau qui représente le plateau.
+        * Methode permettant de placer une lettre sur le plateau
+        * @param ltr , le caractere qui sera affiche
+        * @param colonne , la colonne du tableau qui represente le plateau.
+        * @param ltr , la ligne du tableau qui represente le plateau.
 	    */
         public void placerLettre(char ltr, int colonne, int ligne){
             this.tabPlateau[colonne][ligne]= new CaseDePlateau(new Lettre(ltr));

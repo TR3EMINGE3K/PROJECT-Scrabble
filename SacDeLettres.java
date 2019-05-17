@@ -7,12 +7,12 @@
 public class SacDeLettres {
 
     /**
-    * Elle est composée d'un tableau de type Lettre. 
+    * Elle est composee d'un tableau de type Lettre. 
     */
     private Lettre[] sac;
 
     /**
-	* Méthode qui permet d'obtenir le tableau de lettres.
+	* Methode qui permet d'obtenir le tableau de lettres.
 	* @return sac, le tableau de lettres.
 	*/
     public Lettre[] getSac(){
@@ -20,7 +20,7 @@ public class SacDeLettres {
     }    
 
     /**
-    * Le constructeur du sac, il l'initialise en le remplissant avec 100 lettres fidèles aux règles du jeu.
+    * Le constructeur du sac, il l'initialise en le remplissant avec 100 lettres fideles aux regles du jeu.
 	*/
     public SacDeLettres() {
         sac = new Lettre[100];
@@ -107,16 +107,16 @@ public class SacDeLettres {
     }
 
     /**
-	* Méthode qui permet de supprimer un caractère si il a été pioché.
-	* @param indiceSac , l'indice du caractère que l'on veut supprimer.
+	* Methode qui permet de supprimer un caractere si il a ete pioche.
+	* @param indiceSac , l'indice du caractere que l'on veut supprimer.
 	*/
     public void viderSac(int indiceSac) {
         this.sac[indiceSac].setCar('.');
     }
 
     /**
-	* Méthode qui permet de savoir si le sac est vide.
-	* @return true ou false en fonction de l'état du sac.
+	* Methode qui permet de savoir si le sac est vide.
+	* @return true ou false en fonction de l'etat du sac.
 	*/
     public boolean estVide(){
         for (int i = 0; i<100;i++){
@@ -129,9 +129,9 @@ public class SacDeLettres {
     }
 
     /**
-    * Méthode qui permet de construire une chaine de caractère qui affiche le sac.(Méthode utilisée au début de notre projet pour savoir si le sac se vidait bien etc. 
-    * Elle n'est plus utilisée.).
-	* @return str, la chaine de caractère représentant les lettres du sac. 
+    * Methode qui permet de construire une chaine de caractere qui affiche le sac.(Methode utilisee au debut de notre projet pour savoir si le sac se vidait bien etc. 
+    * Elle n'est plus utilisee.).
+	* @return str, la chaine de caractere representant les lettres du sac. 
 	*/
     String SacToString() {
         String str = " ";

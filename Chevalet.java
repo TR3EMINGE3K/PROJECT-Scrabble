@@ -7,7 +7,7 @@
 public class Chevalet {
 
 	/**
-	* La classe est consitutée d'un tableau de type Lettre
+	* La classe est consitutee d'un tableau de type Lettre
 	*/
 	private Lettre[] chevalet;
 
@@ -22,11 +22,11 @@ public class Chevalet {
 	}    
 
 	/**
-	* Méthode qui tire un entier au hasard entre 2 bornes.
+	* Methode qui tire un entier au hasard entre 2 bornes.
 	*
-	* @param b1 , la borne inférieure
-	* @param b2 , la borne supérieure 
-	* @return L'entier tiré au sort entre b1 et b2.
+	* @param b1 , la borne inferieure
+	* @param b2 , la borne superieure 
+	* @return L'entier tire au sort entre b1 et b2.
 	*/
 	static int hasardo(int b1, int b2) {
 		return ((int) (Math.random() * (b2 - b1 + 1)) + b1);
@@ -43,9 +43,9 @@ public class Chevalet {
 	}
 
 	/**
-	* Méthode qui construit la chaine de caractère pour afficher le chevalet.
+	* Methode qui construit la chaine de caractere pour afficher le chevalet.
 	*
-	* @return str, une chaîne de caractère représentant le chevalet
+	* @return str, une chaîne de caractere representant le chevalet
 	*/
 	String chevaletToString() {
 		String str = ("[");
@@ -57,9 +57,9 @@ public class Chevalet {
 	}
 
 	/**
-	* Méthode qui permet de remplir le chevalet de 7 lettres.
+	* Methode qui permet de remplir le chevalet de 7 lettres.
 	*
-	* @param S , un sac composé d'un certain nombre de lettres.
+	* @param S , un sac compose d'un certain nombre de lettres.
 	*/
 	void remplirChevalet(SacDeLettres S) {
 		int indiceSac = 0;
@@ -82,10 +82,10 @@ public class Chevalet {
     }
     
     /**
-	* Méthode qui vérifie si une lettre choisie par l'utilisateur est bien dans son chevalet.
+	* Methode qui verifie si une lettre choisie par l'utilisateur est bien dans son chevalet.
 	*
-	* @param car , le caractère saisit par l'utilisateur.
-	* @return exists, le booléen qui va nous dire si la lettre existe dans le chevalet.
+	* @param car , le caractere saisit par l'utilisateur.
+	* @return exists, le booleen qui va nous dire si la lettre existe dans le chevalet.
 	*/
     boolean lettreDansChevalet(char car){
         boolean exists= false;
@@ -98,9 +98,9 @@ public class Chevalet {
     }
 
     /**
-	* Méthode qui donne la position d'une lettre dans le chevalet.
+	* Methode qui donne la position d'une lettre dans le chevalet.
 	*
-	* @param car , le caractère saisit par l'utilisateur.
+	* @param car , le caractere saisit par l'utilisateur.
 	* @return un entier qui indique sa place dans le chevalet.
 	*/
     int positionDansChevalet(char car){
@@ -113,12 +113,12 @@ public class Chevalet {
     }
 
     /**
-	* Méthode qui va remplacer la lettre du chevalet par un '.'.
+	* Methode qui va remplacer la lettre du chevalet par un '.'.
 	*
 	* @param indice , l'indice de la lettre qui se fera retirer.
 	*/
     void retirerLettre(int indice){
-        //la lettre est remplacée par un point
+        //la lettre est remplacee par un point
         chevalet[indice]=new Lettre();
     }
 
