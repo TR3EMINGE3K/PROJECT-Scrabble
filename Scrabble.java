@@ -54,11 +54,8 @@ public class Scrabble {
 
 		// On demande le Nombre de joueur.
 		Joueur[] tabJoueurs = Joueur.creerJoueurs(sac);
-		//Ecran.afficherln(strSac);
-		//int i;
-		//while(!sac.estVide()){
-		int adad=1;
-		while(adad<3){
+		
+		while(!sac.estVide()){
 			for(int i=0;i<tabJoueurs.length;i++){
 				// On affiche le chevalet du joueur : 
 				Ecran.afficherln("Voici votre chevalet ",tabJoueurs[i].getNom());
@@ -72,10 +69,8 @@ public class Scrabble {
 				// on remplis le chevalet du joueur qui a joue 
 				tabJoueurs[i].getChev().remplirChevalet(sac);
 				compteurTour++;
-			}adad++;
+			}
 		}
-			/*String strC = tabJoueurs[i-1].chev.chevaletToString();
-			Ecran.afficherln(strC);*/
 
 		strPlateau = plateau.plateauToString();
 		System.out.println(strPlateau);
