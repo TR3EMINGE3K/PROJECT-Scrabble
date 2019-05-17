@@ -232,6 +232,7 @@ public class Joueur {
     * @param motQuadruple , un booleen qui permet de savoir si le mot en construction est deja un mot quadruple 
     *
     */
+
     public void placerLettresBas(Plateau plat, int colonne, int ligne, int scoreLettre, boolean motDouble,
                 boolean motTriple,boolean motQuadruple) {
         boolean motBienPlace = false;
@@ -245,7 +246,7 @@ public class Joueur {
             ligne++;
             boolean estVide = false;
             while (estVide==false){
-                if (!(plat.getTabPlateau()[colonne][ligne].estVide())){
+                if (!(plat.getTabPlateau()[ligne][colonne].estVide())){
                     ligne++;
                     
                 }
@@ -335,6 +336,16 @@ public class Joueur {
         int compteur = 1;
         while ((finMot == false) && (compteur < 6) && (colonne < 14)) {
             colonne++;
+            boolean estVide = false;
+            while (estVide==false){
+                if (!(plat.getTabPlateau()[ligne][colonne].estVide())){
+                    colonne++;
+                    
+                }
+                else {
+                    estVide = true;
+                }
+            }
             
             if (estMotDouble(plat, colonne, ligne)){
                 if  (!motDouble){ 
