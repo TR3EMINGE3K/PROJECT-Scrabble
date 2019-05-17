@@ -1,16 +1,30 @@
+// Medhi Louison, Antoine Claudel, I2 CMI informatique 
+
+/**
+* La classe SacDeLettres de notre jeu.
+*/
+
 public class SacDeLettres {
 
-    // Création d'un tableau de lettre
+    /**
+    * Elle est composée d'un tableau de type Lettre. 
+    */
     private Lettre[] sac;
 
+    /**
+	* Méthode qui permet d'obtenir le tableau de lettres.
+	* @return sac, le tableau de lettres.
+	*/
     public Lettre[] getSac(){
         return sac;
     }    
 
+    /**
+    * Le constructeur du sac, il l'initialise en le remplissant avec 100 lettres fidèles aux règles du jeu.
+	*/
     public SacDeLettres() {
         sac = new Lettre[100];
 
-        // Mise en place de la lettre E dans le sac
         int i;
         for (i = 0; i < 15; i++) {
             sac[i] = new Lettre('E');
@@ -92,12 +106,18 @@ public class SacDeLettres {
         }
     }
 
-    // enlève (remplace par un point) une lettre du sac
+    /**
+	* Méthode qui permet de supprimer un caractère si il a été pioché.
+	* @param indiceSac , l'indice du caractère que l'on veut supprimer.
+	*/
     public void viderSac(int indiceSac) {
         this.sac[indiceSac].setCar('.');
     }
 
-    // test si le sac est vide afin que les joueurs ne piochent pas dedans
+    /**
+	* Méthode qui permet de savoir si le sac est vide.
+	* @return true ou false en fonction de l'état du sac.
+	*/
     public boolean estVide(){
         for (int i = 0; i<100;i++){
             if (this.sac[i].getCar() !='.'){
@@ -108,8 +128,11 @@ public class SacDeLettres {
         return true;
     }
 
-    // juste pour tester que le sac s'actualise bien, ce qui n'est pas le cas (les
-    // lettres ne sont pas retirées du sac quand elles sont piochées)
+    /**
+    * Méthode qui permet de construire une chaine de caractère qui affiche le sac.(Méthode utilisée au début de notre projet pour savoir si le sac se vidait bien etc. 
+    * Elle n'est plus utilisée.).
+	* @return str, la chaine de caractère représentant les lettres du sac. 
+	*/
     String SacToString() {
         String str = " ";
         for (int i = 0; i < 100; i++) {

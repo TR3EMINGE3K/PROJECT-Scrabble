@@ -1,28 +1,54 @@
+// Medhi Louison, Antoine Claudel, I2 CMI informatique 
+
+/**
+* La classe Joueur de notre jeu.
+*/
+
 public class Joueur {
 
-    // Chaque joueur possède un nom et score
+    /**
+    * Un joueur possède un nom, un score et un chevalet.
+    */
     private String nom;
     private int score;
     private Chevalet chev;
 
+    /**
+    * Méthode permettant de récupérer le nom du joueur.
+    * @return nom, le nom du joueur.
+    */
     public String getNom(){
         return nom;
     }
 
+    /**
+    * Méthode permettant de récupérer le score du joueur.
+    * @return score, le score du joueur.
+    */
     public int getScore(){
         return score;
     }
 
+    /**
+    * Méthode permettant de récupérer le chevalet du joueur.
+    * @return chev, le chevalet du joueur.
+    */
     public Chevalet getChev(){
         return chev;
     }
 
-    // Chaque joueur possède son chevalet
+    /**
+    * Constructeur qui initialise le nom comme étant une chaine vide et le score à 0.
+    */
     public Joueur() {
         this.nom = "";
         this.score = 0;
     }
 
+    /**
+    * Constructeur surchargé qui demande la saisie du nom et qui va remplir le chevalet grâce au sac en entrée
+    * @param S , le sac qui va permettre de remplir le chevalet. 
+    */
     public Joueur(SacDeLettres S) {
 
         this.chev = new Chevalet();
@@ -36,7 +62,11 @@ public class Joueur {
 
     }
 
-    // création de n joueurs (jusqu'à 4)
+    /**
+    * Méthode permettant de créer le nombre de joueurs.
+    * @param S , le sac qui va permettre de remplir le chevalet de chaque joueur.
+    * @return tabJoueur le tableau remplis du nombre de joueur saisi par l'utilisateur. 
+    */
     static Joueur[] creerJoueurs(SacDeLettres S) {
         Ecran.afficher("Saisissez le nombre de joueurs. (Entre 1 et 4)\n");
         int n = Clavier.saisirInt();
@@ -53,19 +83,25 @@ public class Joueur {
         return (tabJoueur);
     }
 
-    // Cette fonction transforme une minuscule en majuscule et laisse en majuscule
-    // si c'en est déjà le cas.
-    // Le but est de ne pas compter la saisie d'une minuscule comme une erreur
+
+    /**
+    * Méthode permettant de transformer une minuscule en majuscule. elle consiste à permettre à l'utilisateur de rentrer une lettre en minuscule ou en majuscule et d'être bien détectée.
+    * @param a , le caractère que l'on veut mettre en majuscule.
+    * @return b, le caractère changer en majuscule.
+    */
     static char lettreEnMaj(char a) {
         char b;
         b = Character.toUpperCase(a);
         return b;
     }
 
-    // Placement des lettres sur le plateau: Le joueur va choisir sa case de départ
-    // puis une direction.
-    // il pourra ensuite ajouter des lettres jusqu'à ce qu'il rencontre des cases
-    // non vides ou qu'il sorte du plateau.
+
+    /**
+    * Méthode permettant placer des lettres sur le plateau : Le joueur va choisir sa case de départ
+    * @param sac , le sac qui permettra de remplir de nouveau le chevalet.
+    * @param plat , le plateau sur lequel le joueur va jouer.
+    * @param compteurTour , le compteur qui permet de savoir à quels tour on est (utile que pour le 1er tour.)
+    */
     public void placerLettres( SacDeLettres sac, Plateau plat, int compteurTour) {
         char dir;
         int scoreLettre = 0;
@@ -185,6 +221,17 @@ public class Joueur {
         
     }
 
+    /**
+    * Méthode permettant placer des lettres sur le plateau vers le bas (il faut que l'utilisateur choissise si il veut écrire vers le bas)
+    * @param plat , le plateau sur lequel le joueur va jouer.
+    * @param colonne , la colonne de la 1ere lettre posée.
+    * @param ligne , la ligne de la 1ere lettre posée.
+    * @param scoreLettre , le score cumulé par les lettres posées
+    * @param motDouble , un booléen qui permet de savoir si le mot en construction est déjà un mot double. 
+    * @param motTriple , un booléen qui permet de savoir si le mot en construction est déjà un mot triple. 
+    * @param motQuadruple , un booléen qui permet de savoir si le mot en construction est déjà un mot quadruple 
+    *
+    */
     public void placerLettresBas(Plateau plat, int colonne, int ligne, int scoreLettre, boolean motDouble,
                 boolean motTriple,boolean motQuadruple) {
         boolean motBienPlace = false;
@@ -259,6 +306,17 @@ public class Joueur {
         this.score=this.score+scoreLettre;
     }
 
+    /**
+    * Méthode permettant placer des lettres sur le plateau vers le bas (il faut que l'utilisateur choissise si il veut écrire vers la droite)
+    * @param plat , le plateau sur lequel le joueur va jouer.
+    * @param colonne , la colonne de la 1ere lettre posée.
+    * @param ligne , la ligne de la 1ere lettre posée.
+    * @param scoreLettre , le score cumulé par les lettres posées
+    * @param motDouble , un booléen qui permet de savoir si le mot en construction est déjà un mot double. 
+    * @param motTriple , un booléen qui permet de savoir si le mot en construction est déjà un mot triple. 
+    * @param motQuadruple , un booléen qui permet de savoir si le mot en construction est déjà un mot quadruple 
+    *
+    */
     public void placerLettresDroite(Plateau plat, int colonne, int ligne, int scoreLettre, boolean motDouble,
     boolean motTriple,boolean motQuadruple) {
 
@@ -345,7 +403,15 @@ public class Joueur {
      * (ajoutScore(plat, strLET, colonne, ligne)); if (ligne + 1 >14){ finMot=true;
      * } } } return pts; }
      */
-
+    
+    /**
+    * Méthode permettant d'ajouter le score de la lettre qui est en paramètre 
+    * @param plat , le plateau sur lequel le joueur va jouer.
+    * @param strLET , une lettre posée par le joueur.
+    * @param colonne , la colonne de la lettre en paramètre.
+    * @param ligne , la ligne de la lettre en paramètre.
+    * @return scor, le score de la lettre qu'il faudra ajouter.
+    */
     public int ajoutScore(Plateau plat, char strLET, int colonne, int ligne) {
         Lettre letra = new Lettre(strLET);
         int scor;
@@ -362,11 +428,16 @@ public class Joueur {
 
     }
 
-    public int ComptageScore(int score) {
-        int multiplicateur = 0;
-        return (score * multiplicateur);
-    }
 
+
+
+    /**
+    * Méthode booléenne permettant de savoir une case est comptée comme lettre compte double.
+    * @param plat , le plateau sur lequel le joueur va jouer.
+    * @param colonne , la colonne de la lettre en paramètre.
+    * @param ligne , la ligne de la lettre en paramètre.
+    * @return estDouble, un bouléen qui indiquera si la case est une lettre compte double
+    */
     public boolean estDouble(Plateau plat, int colonne, int ligne) {
         boolean estDouble = false;
         if (plat.getTabPlateau()[colonne][ligne].getType() == "l2") {
@@ -375,6 +446,13 @@ public class Joueur {
         return estDouble;
     }
 
+    /**
+    * Méthode booléenne permettant de savoir une case est comptée comme lettre compte triple.
+    * @param plat , le plateau sur lequel le joueur va jouer.
+    * @param colonne , la colonne de la lettre en paramètre.
+    * @param ligne , la ligne de la lettre en paramètre.
+    * @return estTriple, un bouléen qui indiquera si la case est une lettre compte triple.
+    */
     public boolean estTriple(Plateau plat, int colonne, int ligne) {
         boolean estTriple = false;
         if (plat.getTabPlateau()[colonne][ligne].getType() == "l3") {
@@ -383,6 +461,13 @@ public class Joueur {
         return estTriple;
     }
 
+    /**
+    * Méthode booléenne permettant de savoir une case est comptée comme mot compte double.
+    * @param plat , le plateau sur lequel le joueur va jouer.
+    * @param colonne , la colonne de la lettre en paramètre.
+    * @param ligne , la ligne de la lettre en paramètre.
+    * @return estMotDouble, un bouléen qui indiquera si la case est une mot compte double.
+    */
     public boolean estMotDouble(Plateau plat, int colonne, int ligne) {
         boolean estMotDouble = false;
         if (plat.getTabPlateau()[colonne][ligne].getType() == "m2") {
@@ -391,7 +476,13 @@ public class Joueur {
         return estMotDouble;
 
     }
-
+    /**
+    * Méthode booléenne permettant de savoir une case est comptée comme mot compte triple.
+    * @param plat , le plateau sur lequel le joueur va jouer.
+    * @param colonne , la colonne de la lettre en paramètre.
+    * @param ligne , la ligne de la lettre en paramètre.
+    * @return estMotTriple, un bouléen qui indiquera si la case est une mot compte triple.
+    */
     public boolean estMotTriple(Plateau plat, int colonne, int ligne) {
         boolean estMotTriple = false;
         if (plat.getTabPlateau()[colonne][ligne].getType() == "m3") {

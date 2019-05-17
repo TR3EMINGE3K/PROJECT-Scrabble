@@ -1,10 +1,29 @@
+// Medhi Louison, Antoine Claudel, I2 CMI informatique 
+
+/**
+* La classe Plateau de notre jeu.
+*/
+
+
 public class Plateau{
+
+        /**
+        * Un plateau est formé d'un tableau à 2 dimensions de type CaseDePlateau
+        */
         private CaseDePlateau[][] tabPlateau;
 
+        /**
+        * Méthode permettant d'obtenir le tableau du Plateau.
+        * @return tabPlateau, le tableau du Plateau.
+        */
         public CaseDePlateau[][] getTabPlateau(){
             return tabPlateau;
         }    
 
+
+        /**
+	    * Constructeur du plateau, il initialise le tableau comme étant un tableau de 15x15. Il remplit ensuite chaque case de ce plateau fidèlement aux règles.
+	    */
         public Plateau(){
             tabPlateau=  new CaseDePlateau[15][15];
             //i correspond à la colonne et j à la ligne.
@@ -156,7 +175,10 @@ public class Plateau{
                 }
             }
         }
-
+        /**
+        * Méthode permettant de construire une chaine de caractère représentant le plateau.
+        * @return str, la chaine qui représente le plateau .
+	    */
         public String plateauToString(){
             String str= "";
             for (int i =0;i<10;i++){
@@ -185,6 +207,12 @@ public class Plateau{
             return str;
         }
 
+        /**
+        * Méthode permettant de placer une lettre sur le plateau
+        * @param ltr , le caractère qui sera affiché
+        * @param colonne , la colonne du tableau qui représente le plateau.
+        * @param ltr , la ligne du tableau qui représente le plateau.
+	    */
         public void placerLettre(char ltr, int colonne, int ligne){
             this.tabPlateau[colonne][ligne]= new CaseDePlateau(new Lettre(ltr));
         }

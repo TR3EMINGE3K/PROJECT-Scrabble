@@ -1,3 +1,10 @@
+// Medhi Louison, Antoine Claudel, I2 CMI informatique 
+
+/**
+* Un jeu de Scrabble de 1 à 4 joueurs.
+*/
+
+
 public class Scrabble {
 
 	/*static class position{
@@ -17,11 +24,25 @@ public class Scrabble {
 		}
 	}	*/
 	
-	//affiche les scores et déclare le vainqueur à la fin de la partie
+
+
+	
+	/**
+	* Affiche les scores et déclare le vainqueur à la fin de la partie
+	*
+	* @param tabJoueurs , un tableau comportant tout les joueurs de la partie.
+	* 
+	*/
 	public static void affichageFinDePartie(Joueur[] tabJoueurs){
 		//recherche du vainqueur et affichage des scores
+
+		/**
+		* On dit que le scoreMax de base est à 0 ainsi que son indice.
+		*/
 		int scoreMax=0;
 		int indiceMaxScore=0;
+
+
 		for(int i =0;i<tabJoueurs.length;i++){
 			Ecran.afficherln("\n La partie est finie ! \n");
 			Ecran.afficherln("Le score de ",tabJoueurs[i].getNom()," est de ",tabJoueurs[i].getScore(), "points\n");
